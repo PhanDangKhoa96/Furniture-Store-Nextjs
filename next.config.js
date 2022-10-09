@@ -3,7 +3,13 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ["tailwindui.com"],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '*',
+
+            },
+        ],
     },
 };
 

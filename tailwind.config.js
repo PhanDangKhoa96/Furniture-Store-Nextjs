@@ -5,6 +5,15 @@ module.exports = {
         "./components/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
+        screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+        },
+        container: {
+            padding: "20px",
+            center: true
+        },
         extend: {
             fontFamily: {
                 raleway: ["Raleway", "sans-serif"],
