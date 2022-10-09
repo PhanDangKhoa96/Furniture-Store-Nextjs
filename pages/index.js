@@ -1,16 +1,10 @@
-import {getSession, signIn, signOut, useSession} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import React from "react";
 import {fetchCategories} from "../utils/fetchCategories";
 import {fetchProducts} from "../utils/fetchProducts";
 
 const Home = ({categories, products}) => {
-    console.log(products, "products");
-
-    return (
-        <div>
-            <h1>hello world</h1>
-        </div>
-    );
+    return <div className="text-5xl font-title">Home page</div>;
 };
 
 export default Home;

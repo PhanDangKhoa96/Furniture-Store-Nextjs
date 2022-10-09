@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply text-base font-light font-raleway md:text-lg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    @apply font-title;
+}
+
+h1 {
+    @apply text-6xl md:text-7xl;
+}
+
+h2 {
+    @apply text-5xl md:text-[3.375rem];
+}
+
+h3 {
+    @apply text-4xl md:text-5xl;
+}
+
+.nav-link {
+    @apply text-sm font-extrabold tracking-widest md:text-base;
+}
+
+.btn-primary {
+    @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
+}
