@@ -4,17 +4,31 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import classNames from './../../helper/classNames';
-
-const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-]
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 
 
 const Header = () => {
+    const { pathname } = useRouter()
+
+    const navigation = [
+        { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
+        { name: 'About', href: '/about' },
+        { name: 'Shop', href: '/shop' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Contact', href: '/contact' },
+    ]
+
+    navigation.map((item) => {
+        if (item.href === pathname) {
+            return item.current = true
+        }
+
+        return item.current = false
+    })
+
     return (
         <Disclosure as="nav" className="bg-dark-vanilla fixed w-full">
             {({ open }) => (
@@ -23,7 +37,7 @@ const Header = () => {
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
                                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -33,35 +47,20 @@ const Header = () => {
                                 </Disclosure.Button>
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="flex flex-shrink-0 items-center">
-                                    <div className="h-8 aspect-square w-auto lg:block">
-                                        {/* <Image
-                                            layout='fill'
-                                            src="https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2250&q=80"
-                                            alt="Your Company"
-                                        /> */}
-                                    </div>
-
-                                    {/* <img
-                                        className="hidden h-8 w-auto lg:block"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                        alt="Your Company"
-                                    /> */}
-                                </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>
@@ -140,11 +139,11 @@ const Header = () => {
                         show={open}
                         as={Fragment}
                         enter="transition duration-300 ease-out"
-                        enterFrom="transform scale-95 opacity-0"
-                        enterTo="transform scale-100 opacity-100"
+                        enterFrom="scale-95 opacity-0 -translate-y-5"
+                        enterTo="scale-100 opacity-100 translate-y-0"
                         leave="transition duration-200 ease-out"
-                        leaveFrom="transform scale-100 opacity-100"
-                        leaveTo="transform scale-95 opacity-0"
+                        leaveFrom="scale-100 opacity-100 translate-y-0 "
+                        leaveTo="scale-95 opacity-0 -translate-y-5"
                     >
                         <Disclosure.Panel className="sm:hidden">
                             <div className="space-y-1 px-2 pt-2 pb-3">
@@ -154,7 +153,7 @@ const Header = () => {
                                         as="a"
                                         href={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700',
                                             'block px-3 py-2 rounded-md text-base font-medium'
                                         )}
                                         aria-current={item.current ? 'page' : undefined}
