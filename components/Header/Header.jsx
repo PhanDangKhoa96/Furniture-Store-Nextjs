@@ -6,6 +6,7 @@ import Image from 'next/image'
 import classNames from './../../helper/classNames';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import NextImage from '../../helper/NextImage/NextImage'
 
 
 
@@ -16,7 +17,7 @@ const Header = () => {
         { name: 'Home', href: '/' },
         { name: 'Services', href: '/services' },
         { name: 'About', href: '/about' },
-        { name: 'Shop', href: '/shop' },
+        { name: 'Shop', href: '/product' },
         { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
     ]
@@ -35,7 +36,7 @@ const Header = () => {
                 <>
                     <div className="container">
                         <div className="flex h-16 items-center justify-between">
-                            <div className="flex items-center sm:hidden">
+                            <div className="flex items-center md:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
                                     <span className="sr-only">Open main menu</span>
@@ -46,26 +47,33 @@ const Header = () => {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4">
+                            <Link href='/'>
+                                <div className='h-full'>
+                                <NextImage src='/logo-black.svg' alt='logo aries' />
+                                </div>
+                            </Link>
+                            <div className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
+                                <div className="hidden md:ml-6 md:block">
+                                    <div className="flex space-x-2">
                                         {navigation.map((item) => (
                                             <Link
                                                 key={item.name}
                                                 href={item.href}
-                                                className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700 hover:text-white',
-                                                    'px-3 py-2 rounded-md text-sm font-medium'
-                                                )}
-                                                aria-current={item.current ? 'page' : undefined}
                                             >
-                                                {item.name}
+                                                <span className={classNames(
+                                                    item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700 hover:text-white',
+                                                    'px-3 py-2 rounded-md nav-link cursor-pointer'
+                                                )} >
+                                                    {item.name}
+                                                </span>
                                             </Link>
                                         ))}
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+
+                            <div className="flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                                 <button
                                     type="button"
                                     className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -145,21 +153,21 @@ const Header = () => {
                         leaveFrom="scale-100 opacity-100 translate-y-0 "
                         leaveTo="scale-95 opacity-0 -translate-y-5"
                     >
-                        <Disclosure.Panel className="sm:hidden">
+                        <Disclosure.Panel className="md:hidden">
                             <div className="space-y-1 px-2 pt-2 pb-3">
                                 {navigation.map((item) => (
-                                    <Disclosure.Button
-                                        key={item.name}
-                                        as="a"
-                                        href={item.href}
-                                        className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700',
-                                            'block px-3 py-2 rounded-md text-base font-medium'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </Disclosure.Button>
+                                    <Link key={item.name} href={item.href}>
+                                        <Disclosure.Button
+                                            as="span"
+                                            className={classNames(
+                                                item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700',
+                                                'block px-3 py-2 rounded-md text-base nav-link'
+                                            )}
+                                            aria-current={item.current ? 'page' : undefined}
+                                        >
+                                            {item.name}
+                                        </Disclosure.Button>
+                                    </Link>
                                 ))}
                             </div>
                         </Disclosure.Panel>
