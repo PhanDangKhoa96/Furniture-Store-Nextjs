@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    @apply text-base text-raisin-black font-light font-raleway md:text-lg;
+    @apply text-sm text-raisin-black font-light font-raleway md:text-base;
 }
 
 h1,
@@ -32,10 +32,18 @@ h3 {
     @apply text-4xl md:text-5xl;
 }
 
+.section {
+    @apply py-10 md:py-20;
+}
+
 .nav-link {
-    @apply text-sm font-semibold tracking-widest md:text-base;
+    @apply text-sm font-semibold tracking-widest;
 }
 
 .btn-primary {
     @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
+}
+
+.menu-item {
+    @apply block px-4 py-2 text-sm text-gray-700 w-full text-left;
 }

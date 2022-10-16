@@ -7,7 +7,8 @@ import classNames from './../../helper/classNames';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import NextImage from '../../helper/NextImage/NextImage'
-
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Else, If, Then } from 'react-if'
 
 
 const Header = () => {
@@ -30,8 +31,10 @@ const Header = () => {
         return item.current = false
     })
 
+    const { data: session } = useSession();
+
     return (
-        <Disclosure as="nav" className="bg-dark-vanilla fixed w-full">
+        <Disclosure as="nav" className="bg-white-chocolate fixed w-full">
             {({ open }) => (
                 <>
                     <div className="container">
@@ -49,7 +52,7 @@ const Header = () => {
                             </div>
                             <Link href='/'>
                                 <div className='h-full'>
-                                <NextImage src='/logo-black.svg' alt='logo aries' />
+                                    <NextImage src='/logo-black.svg' alt='logo aries' />
                                 </div>
                             </Link>
                             <div className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
@@ -72,74 +75,65 @@ const Header = () => {
                                 </div>
                             </div>
 
+                            <If condition={session}>
+                                <Then>
+                                    {/* Profile dropdown */}
+                                    <Menu as="div" className="relative ml-3">
+                                        <div>
+                                            <Menu.Button className="flex rounded-full text-sm focus:outline-none">
+                                                <span className="sr-only">Open user menu</span>
+                                                <div className='w-10 h-10 rounded-full overflow-hidden'>
+                                                    <NextImage src={session?.user?.image} />
+                                                </div>
+                                            </Menu.Button>
+                                        </div>
+                                        <Transition
+                                            as={Fragment}
+                                            enter="transition ease-out duration-100"
+                                            enterFrom="transform opacity-0 scale-95"
+                                            enterTo="transform opacity-100 scale-100"
+                                            leave="transition ease-in duration-75"
+                                            leaveFrom="transform opacity-100 scale-100"
+                                            leaveTo="transform opacity-0 scale-95"
+                                        >
+                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <a
+                                                            href="#"
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                        >
+                                                            Your Profile
+                                                        </a>
+                                                    )}
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <a
+                                                            href="#"
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                        >
+                                                            Settings
+                                                        </a>
+                                                    )}
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button onClick={signOut} className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                        >
+                                                            Sign out
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                            </Menu.Items>
+                                        </Transition>
+                                    </Menu>
+                                </Then>
+                                <Else>
+                                    <button onClick={() => signIn()} className="bg-gray-900 text-white nav-link px-3 py-2 rounded-md cursor-pointer">Sign in</button>
+                                </Else>
+                            </If>
 
-                            <div className="flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-                                <button
-                                    type="button"
-                                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                    <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
-
-                                {/* Profile dropdown */}
-                                <Menu as="div" className="relative ml-3">
-                                    <div>
-                                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                            <span className="sr-only">Open user menu</span>
-                                            <Image
-                                                width={32}
-                                                height={32}
-                                                className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                alt=""
-                                            />
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Your Profile
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Settings
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Sign out
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
-                            </div>
                         </div>
                     </div>
 
@@ -172,8 +166,6 @@ const Header = () => {
                             </div>
                         </Disclosure.Panel>
                     </Transition>
-
-
                 </>
             )}
         </Disclosure>
