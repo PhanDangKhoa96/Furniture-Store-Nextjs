@@ -9,10 +9,12 @@ import { useRouter } from 'next/router'
 import NextImage from '../../helper/NextImage/NextImage'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Else, If, Then } from 'react-if'
+import { useWindowScroll } from 'react-use'
 
 
 const Header = () => {
     const { pathname } = useRouter()
+    const { y } = useWindowScroll();
 
     const navigation = [
         { name: 'Home', href: '/' },
@@ -22,6 +24,8 @@ const Header = () => {
         { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
     ]
+
+
 
     navigation.map((item) => {
         if (item.href === pathname) {
@@ -34,7 +38,7 @@ const Header = () => {
     const { data: session } = useSession();
 
     return (
-        <Disclosure as="nav" className="bg-white-chocolate fixed w-full">
+        <Disclosure as="nav" className={`bg-white-chocolate fixed w-full z-[1000] ${y> 100 && 'shadow-lg'} `}>
             {({ open }) => (
                 <>
                     <div className="container">

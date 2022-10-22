@@ -30,7 +30,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="flex"
                         >
-                            <i class="ri-facebook-fill"></i>
+                            <i className="ri-facebook-fill"></i>
                         </a>
                     </div>
                     <div className="grid place-items-center rounded-full aspect-square w-[30px] text-xl bg-black text-white-chocolate">
@@ -40,7 +40,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="flex"
                         >
-                            <i class="ri-instagram-fill"></i>
+                            <i className="ri-instagram-fill"></i>
                         </a>
                     </div>
                     <div className="grid place-items-center rounded-full aspect-square w-[30px] text-xl bg-black text-white-chocolate">
@@ -50,7 +50,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="flex"
                         >
-                            <i class="ri-pinterest-fill"></i>
+                            <i className="ri-pinterest-fill"></i>
                         </a>
                     </div>
                     <div className="grid place-items-center rounded-full aspect-square w-[30px] text-xl bg-black text-white-chocolate">
@@ -60,7 +60,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="flex"
                         >
-                            <i class="ri-twitter-fill"></i>
+                            <i className="ri-twitter-fill"></i>
                         </a>
                     </div>
                 </div>

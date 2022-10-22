@@ -1,7 +1,7 @@
-import {SessionProvider} from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
+import 'remixicon/fonts/remixicon.css';
 import Layout from "../components/layout";
 import "../styles/global.scss";
-import 'remixicon/fonts/remixicon.css'
 
 function MyApp({Component, pageProps: {session, ...pageProps}}) {
     return (
