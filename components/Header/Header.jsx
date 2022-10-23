@@ -8,6 +8,7 @@ import NextImage from '../../helper/NextImage/NextImage';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { Else, If, Then } from 'react-if';
 import { useWindowScroll } from 'react-use';
+import Cart from '../Cart/Cart';
 
 const Header = () => {
     const { pathname } = useRouter();
@@ -94,6 +95,7 @@ const Header = () => {
                                 </div>
                             </div>
 
+                            <Cart />
                             <If condition={session}>
                                 <Then>
                                     {/* Profile dropdown */}

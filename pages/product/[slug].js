@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { fetchProducts } from '../../utils/fetchProducts';
-import { groq } from 'next-sanity';
-import { sanityClient } from '../../sanity';
+import { fetchProductDetail } from '../../utils/fetchProductDetail';
+import Image from 'next/image';
+import { urlFor } from '../../sanity';
+import { StoreContext } from '../../store/context/store';
 
 export async function getStaticPaths() {
     const products = await fetchProducts();
@@ -15,20 +17,38 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    // const product = await fetchProductDetail('third-item');
     const { slug } = params;
-    const query = groq`*[_type == "product" && slug.current == $slug]{
-    _id, ...
-    }`;
-    const product = await sanityClient.fetch(query, { slug });
+    const product = await fetchProductDetail(slug);
     return {
-        props: { product, slug }
+        props: { product }
     };
 }
 
-const ProductDetail = ({ product, slug }) => {
-    console.log(product, slug);
-    return <div>product detail page</div>;
+const ProductDetail = ({ product }) => {
+    const { state, dispatch } = useContext(StoreContext);
+
+    console.log(state);
+    return (
+        <article className="container my-12">
+            <div className="relative w-full aspect-[3/1]">
+                <Image
+                    src={urlFor(product.image).url()}
+                    layout="fill"
+                    alt="image"
+                    objectFit="cover"
+                />
+            </div>
+
+            <div>
+                <h2>{product.title}</h2>
+                <p>{product.description}</p>
+            </div>
+
+            <button className="bg-quick-silver p-3 text-white hover:text-amber-200 hover:bg-blue-700 transition-all duration-300">
+                Buy now
+            </button>
+        </article>
+    );
 };
 
 export default ProductDetail;

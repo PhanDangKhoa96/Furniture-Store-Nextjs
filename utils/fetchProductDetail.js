@@ -1,11 +1,11 @@
+import { groq } from 'next-sanity';
+import { sanityClient } from '../sanity';
+
 export const fetchProductDetail = async (slug) => {
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/getProductDetail?slug=${slug}`
-    );
-
-    const { product } = await res.json();
-
-    console.log(product);
+    const query = groq`*[_type == "product" && slug.current == $slug][0]{
+    _id, ...
+    }`;
+    const product = await sanityClient.fetch(query, { slug });
 
     return product;
 };
