@@ -2,11 +2,12 @@
 
 import { sanityClient } from '../../sanity';
 import { groq } from 'next-sanity';
-const query = groq`*[_type == "product"]{
+
+const query = groq`*[_type == "product" && slug.current == ${slug}]{
     _id, ...
     }`;
 
 export default async function handler(req, res) {
-    const products = await sanityClient.fetch(query);
-    res.status(200).json({ products });
+    const product = await sanityClient.fetch(query, { slug });
+    res.status(200).json({ product });
 }

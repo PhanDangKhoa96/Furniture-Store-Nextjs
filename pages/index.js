@@ -11,11 +11,12 @@ import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
 
 const Home = ({ categories, products }) => {
+    console.log(products);
     return (
         <>
             <Hero />
             <Intro />
-            <ProductListing />
+            <ProductListing products={products} />
             <AboutUs />
             <Newsletter />
             <BlogListing />

@@ -1,19 +1,16 @@
-import React from 'react'
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import React, { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from './../../helper/classNames';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import NextImage from '../../helper/NextImage/NextImage'
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Else, If, Then } from 'react-if'
-import { useWindowScroll } from 'react-use'
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import NextImage from '../../helper/NextImage/NextImage';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { Else, If, Then } from 'react-if';
+import { useWindowScroll } from 'react-use';
 
 const Header = () => {
-    const { pathname } = useRouter()
+    const { pathname } = useRouter();
     const { y } = useWindowScroll();
 
     const navigation = [
@@ -22,23 +19,26 @@ const Header = () => {
         { name: 'About', href: '/about' },
         { name: 'Shop', href: '/product' },
         { name: 'Blog', href: '/blog' },
-        { name: 'Contact', href: '/contact' },
-    ]
-
-
+        { name: 'Contact', href: '/contact' }
+    ];
 
     navigation.map((item) => {
         if (item.href === pathname) {
-            return item.current = true
+            return (item.current = true);
         }
 
-        return item.current = false
-    })
+        return (item.current = false);
+    });
 
     const { data: session } = useSession();
 
     return (
-        <Disclosure as="nav" className={`bg-white-chocolate fixed w-full z-[1000] ${y> 100 && 'shadow-lg'} `}>
+        <Disclosure
+            as="nav"
+            className={`bg-white-chocolate fixed w-full z-[1000] ${
+                y > 100 && 'shadow-lg'
+            } `}
+        >
             {({ open }) => (
                 <>
                     <div className="container">
@@ -46,17 +46,28 @@ const Header = () => {
                             <div className="flex items-center md:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
-                                    <span className="sr-only">Open main menu</span>
+                                    <span className="sr-only">
+                                        Open main menu
+                                    </span>
                                     {open ? (
-                                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                                        <XMarkIcon
+                                            className="block h-6 w-6"
+                                            aria-hidden="true"
+                                        />
                                     ) : (
-                                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                                        <Bars3Icon
+                                            className="block h-6 w-6"
+                                            aria-hidden="true"
+                                        />
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <Link href='/'>
-                                <div className='h-full'>
-                                    <NextImage src='/logo-black.svg' alt='logo aries' />
+                            <Link href="/" className="cursor-pointer">
+                                <div className="h-full relative z-10">
+                                    <NextImage
+                                        src="/logo-black.svg"
+                                        alt="logo aries"
+                                    />
                                 </div>
                             </Link>
                             <div className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
@@ -67,10 +78,14 @@ const Header = () => {
                                                 key={item.name}
                                                 href={item.href}
                                             >
-                                                <span className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700 hover:text-white',
-                                                    'px-3 py-2 rounded-md nav-link cursor-pointer'
-                                                )} >
+                                                <span
+                                                    className={classNames(
+                                                        item.current
+                                                            ? 'bg-gray-900 text-white'
+                                                            : 'hover:bg-gray-700 hover:text-white',
+                                                        'px-3 py-2 rounded-md nav-link cursor-pointer'
+                                                    )}
+                                                >
                                                     {item.name}
                                                 </span>
                                             </Link>
@@ -85,9 +100,15 @@ const Header = () => {
                                     <Menu as="div" className="relative ml-3">
                                         <div>
                                             <Menu.Button className="flex rounded-full text-sm focus:outline-none">
-                                                <span className="sr-only">Open user menu</span>
-                                                <div className='w-10 h-10 rounded-full overflow-hidden'>
-                                                    <NextImage src={session?.user?.image} />
+                                                <span className="sr-only">
+                                                    Open user menu
+                                                </span>
+                                                <div className="w-10 h-10 rounded-full overflow-hidden">
+                                                    <NextImage
+                                                        src={
+                                                            session?.user?.image
+                                                        }
+                                                    />
                                                 </div>
                                             </Menu.Button>
                                         </div>
@@ -105,7 +126,12 @@ const Header = () => {
                                                     {({ active }) => (
                                                         <a
                                                             href="#"
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                            className={classNames(
+                                                                active
+                                                                    ? 'bg-gray-100'
+                                                                    : '',
+                                                                'menu-item'
+                                                            )}
                                                         >
                                                             Your Profile
                                                         </a>
@@ -115,7 +141,12 @@ const Header = () => {
                                                     {({ active }) => (
                                                         <a
                                                             href="#"
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                            className={classNames(
+                                                                active
+                                                                    ? 'bg-gray-100'
+                                                                    : '',
+                                                                'menu-item'
+                                                            )}
                                                         >
                                                             Settings
                                                         </a>
@@ -123,7 +154,14 @@ const Header = () => {
                                                 </Menu.Item>
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <button onClick={signOut} className={classNames(active ? 'bg-gray-100' : '', 'menu-item')}
+                                                        <button
+                                                            onClick={signOut}
+                                                            className={classNames(
+                                                                active
+                                                                    ? 'bg-gray-100'
+                                                                    : '',
+                                                                'menu-item'
+                                                            )}
                                                         >
                                                             Sign out
                                                         </button>
@@ -134,10 +172,14 @@ const Header = () => {
                                     </Menu>
                                 </Then>
                                 <Else>
-                                    <button onClick={() => signIn()} className="bg-gray-900 text-white nav-link px-3 py-2 rounded-md cursor-pointer">Sign in</button>
+                                    <button
+                                        onClick={() => signIn()}
+                                        className="bg-gray-900 text-white nav-link px-3 py-2 rounded-md cursor-pointer"
+                                    >
+                                        Sign in
+                                    </button>
                                 </Else>
                             </If>
-
                         </div>
                     </div>
 
@@ -158,10 +200,16 @@ const Header = () => {
                                         <Disclosure.Button
                                             as="span"
                                             className={classNames(
-                                                item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700',
+                                                item.current
+                                                    ? 'bg-gray-900 text-white'
+                                                    : 'hover:bg-gray-700',
                                                 'block px-3 py-2 rounded-md text-base nav-link'
                                             )}
-                                            aria-current={item.current ? 'page' : undefined}
+                                            aria-current={
+                                                item.current
+                                                    ? 'page'
+                                                    : undefined
+                                            }
                                         >
                                             {item.name}
                                         </Disclosure.Button>
@@ -173,7 +221,7 @@ const Header = () => {
                 </>
             )}
         </Disclosure>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
