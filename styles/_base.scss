@@ -1,15 +1,15 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    @apply text-base font-light font-raleway md:text-lg;
+  @apply text-sm text-raisin-black font-light font-raleway min-h-screen grid grid-rows-[auto_1fr_auto] md:text-base;
 }
 
 h1,
@@ -17,25 +17,41 @@ h2,
 h3,
 h4,
 h5 {
-    @apply font-title;
+  @apply font-title;
 }
 
 h1 {
-    @apply text-6xl md:text-7xl;
+  @apply text-6xl md:text-7xl;
+  //72px
 }
 
 h2 {
-    @apply text-5xl md:text-[3.375rem];
+  @apply text-5xl md:text-[3.375rem];
+  //54px
 }
 
 h3 {
-    @apply text-4xl md:text-5xl;
+  @apply text-4xl md:text-5xl;
+  //48px
+}
+
+.product-title {
+  @apply text-xl font-semibold md:text-2xl;
+  //24px
+}
+
+.section {
+  @apply py-10 md:py-20;
 }
 
 .nav-link {
-    @apply text-sm font-extrabold tracking-widest md:text-base;
+  @apply text-sm font-semibold tracking-widest;
 }
 
 .btn-primary {
-    @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
+  @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
+}
+
+.menu-item {
+  @apply block px-4 py-2 text-sm text-gray-700 w-full text-left;
 }

@@ -2,5 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./font";
-@import "./base";
+@import './font';
+@import './base';
+@import './customize/next-image';
+@import './customize/scroll-to-top';
