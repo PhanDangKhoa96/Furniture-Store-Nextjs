@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Furniture-Store-Nextjs.iml" filepath="$PROJECT_DIR$/.idea/Furniture-Store-Nextjs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/furniture-store-nextjs.iml" filepath="$PROJECT_DIR$/.idea/furniture-store-nextjs.iml" />
     </modules>
   </component>
