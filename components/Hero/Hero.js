@@ -6,7 +6,7 @@ const Hero = () => {
         <div className="h-[calc(100vh-4rem)] w-full grid place-items-center relative">
             <Image
                 layout="fill"
-                src="/home/hero.jpg"
+                src="/hero-img.jpg"
                 alt="image"
                 objectFit="cover"
             />

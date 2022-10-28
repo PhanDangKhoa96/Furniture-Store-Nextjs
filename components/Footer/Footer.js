@@ -22,7 +22,7 @@ const Footer = () => {
                         </button>
                     </form>
                 </div>
-                <div className="flex mb-5 gap-x-4 justify-center md:absolute top-[10%] left-0 md:flex-col md:gap-y-5">
+                <div className="flex mb-5 gap-x-4 justify-center md:absolute top-[10%] left-5 md:flex-col md:gap-y-5">
                     <div className="grid place-items-center rounded-full aspect-square w-[30px] text-xl bg-black text-white-chocolate">
                         <a
                             href="#"

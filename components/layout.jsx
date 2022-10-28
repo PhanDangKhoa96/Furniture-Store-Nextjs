@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import Head from "next/head";
 
 const Layout = ({ children }) => {
     const backToTop = useRef();
@@ -29,6 +30,9 @@ const Layout = ({ children }) => {
 
     return (
         <>
+            <Head>
+                <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+            </Head>
             <Header />
             <main className="pt-16">{children}</main>
             <Footer />

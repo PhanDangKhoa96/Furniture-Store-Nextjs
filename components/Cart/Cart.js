@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { StoreContext } from '../../store/context/store';
 
 const solutions = [
     {
@@ -23,20 +24,20 @@ const solutions = [
     }
 ];
 const Cart = () => {
+    const { state } = useContext(StoreContext);
     return (
         <div className="max-w-sm mr-8">
             <Popover className="relative">
                 {({ open }) => (
                     <>
                         <Popover.Button
-                            className={`
-                ${open ? '' : 'text-opacity-90'}
-                group inline-flex items-center rounded-md bg-orange-700 px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
-                        >
+                            className={`${open ? '' : 'text-opacity-90'}
+                group inline-flex items-center rounded-md bg-orange-700 px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}>
                             <ShoppingCartIcon
                                 className={`${open ? '' : 'text-opacity-70'}
                    h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                             />
+                            {state.length}
                         </Popover.Button>
                         <Transition
                             as={Fragment}
@@ -45,8 +46,7 @@ const Cart = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1"
-                        >
+                            leaveTo="opacity-0 translate-y-1">
                             <Popover.Panel className="absolute right-0 z-10 mt-3 w-screen max-w-sm px-4 sm:px-0">
                                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                     <div className="relative grid gap-8 bg-white p-7">
@@ -54,8 +54,7 @@ const Cart = () => {
                                             <a
                                                 key={item.name}
                                                 href={item.href}
-                                                className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                            >
+                                                className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
                                                     <item.icon aria-hidden="true" />
                                                 </div>
@@ -89,8 +88,7 @@ function IconOne() {
             height="48"
             viewBox="0 0 48 48"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             <rect width="48" height="48" rx="8" fill="#FFEDD5" />
             <path
                 d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
@@ -122,8 +120,7 @@ function IconTwo() {
             height="48"
             viewBox="0 0 48 48"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             <rect width="48" height="48" rx="8" fill="#FFEDD5" />
             <path
                 d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
@@ -148,8 +145,7 @@ function IconThree() {
             height="48"
             viewBox="0 0 48 48"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             <rect width="48" height="48" rx="8" fill="#FFEDD5" />
             <rect x="13" y="32" width="2" height="4" fill="#FDBA74" />
             <rect x="17" y="28" width="2" height="8" fill="#FDBA74" />

@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { fetchProducts } from '../../utils/fetchProducts';
 import { fetchProductDetail } from '../../utils/fetchProductDetail';
 import Image from 'next/image';
 import { urlFor } from '../../sanity';
-import { StoreContext } from '../../store/context/store';
+import { StoreContext, useStoreContext } from '../../store/context/store';
+import constants from '../../constants/constants';
 
 export async function getStaticPaths() {
     const products = await fetchProducts();
@@ -25,9 +26,16 @@ export async function getStaticProps({ params }) {
 }
 
 const ProductDetail = ({ product }) => {
-    const { state, dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useStoreContext();
 
-    console.log(state);
+    const addToCart = (item) => {
+        dispatch({ type: constants.ADD_TO_CART, payload: item });
+    };
+
+    useEffect(() => {
+        console.log(state, 'state from product detail');
+    });
+
     return (
         <article className="container my-12">
             <div className="relative w-full aspect-[3/1]">
@@ -44,7 +52,9 @@ const ProductDetail = ({ product }) => {
                 <p>{product.description}</p>
             </div>
 
-            <button className="bg-quick-silver p-3 text-white hover:text-amber-200 hover:bg-blue-700 transition-all duration-300">
+            <button
+                className="bg-quick-silver p-3 text-white hover:text-amber-200 hover:bg-blue-700 transition-all duration-300"
+                onClick={() => addToCart(product)}>
                 Buy now
             </button>
         </article>
