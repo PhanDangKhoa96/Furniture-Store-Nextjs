@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 
-const NextImage = ({ src, objectFit = 'contain', alt = '' }) => {
+const NextImage = ({
+                       src,
+                       objectFit = 'contain',
+                       alt = '',
+                       objectPosition
+                   }) => {
     return (
         <div className="next-image">
             <Image
@@ -10,7 +15,8 @@ const NextImage = ({ src, objectFit = 'contain', alt = '' }) => {
                 objectFit={objectFit}
                 src={src}
                 alt={`next image ${alt}`}
-            ></Image>
+                objectPosition={objectPosition}
+            />
         </div>
     );
 };

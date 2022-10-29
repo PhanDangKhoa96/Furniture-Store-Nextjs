@@ -1,15 +1,9 @@
-import React, {
-    createContext,
-    useContext,
-    useEffect,
-    useReducer,
-    useState
-} from 'react';
+import React, {createContext, useContext, useEffect, useReducer, useState} from 'react';
 import StoreReducer from '../reducer/storeReducer';
 import constants from '../../constants/constants';
 
 export const StoreContext = createContext(undefined);
-const StoreProvider = ({ children }) => {
+const StoreProvider = ({children}) => {
     const initialState = [];
     const [cart, setCart] = useState(initialState);
     const [state, dispatch] = useReducer(StoreReducer, cart);
@@ -18,7 +12,7 @@ const StoreProvider = ({ children }) => {
         const localCart = JSON.parse(localStorage.getItem('myCart'));
 
         if (localCart) {
-            dispatch({ type: constants.INIT_STORE, payload: localCart });
+            dispatch({type: constants.INIT_STORE, payload: localCart});
         }
     }, []);
 
@@ -28,9 +22,8 @@ const StoreProvider = ({ children }) => {
         }
     }, [cart]);
 
-    console.log(cart, 'cart from store');
     return (
-        <StoreContext.Provider value={{ state, dispatch }}>
+        <StoreContext.Provider value={{state, dispatch}}>
             {children}
         </StoreContext.Provider>
     );

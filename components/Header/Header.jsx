@@ -1,26 +1,26 @@
-import React, { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import React, {Fragment} from 'react';
+import {Disclosure, Menu, Transition} from '@headlessui/react';
+import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
 import classNames from './../../helper/classNames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import NextImage from '../../helper/NextImage/NextImage';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { Else, If, Then } from 'react-if';
-import { useWindowScroll } from 'react-use';
+import {signIn, signOut, useSession} from 'next-auth/react';
+import {Else, If, Then} from 'react-if';
+import {useWindowScroll} from 'react-use';
 import Cart from '../Cart/Cart';
 
 const Header = () => {
-    const { pathname } = useRouter();
-    const { y } = useWindowScroll();
+    const {pathname} = useRouter();
+    const {y} = useWindowScroll();
 
     const navigation = [
-        { name: 'Home', href: '/' },
-        { name: 'Services', href: '/services' },
-        { name: 'About', href: '/about' },
-        { name: 'Shop', href: '/product' },
-        { name: 'Blog', href: '/blog' },
-        { name: 'Contact', href: '/contact' }
+        {name: 'Home', href: '/'},
+        {name: 'Services', href: '/services'},
+        {name: 'About', href: '/about'},
+        {name: 'Shop', href: '/product'},
+        {name: 'Blog', href: '/blog'},
+        {name: 'Contact', href: '/contact'}
     ];
 
     navigation.map((item) => {
@@ -31,22 +31,22 @@ const Header = () => {
         return (item.current = false);
     });
 
-    const { data: session } = useSession();
+    const {data: session} = useSession();
 
     return (
         <Disclosure
             as="nav"
             className={`bg-white-chocolate fixed w-full z-[1000] ${
-                y > 100 && 'shadow-lg'
-            } `}
-        >
-            {({ open }) => (
+                y > 100 ? 'shadow-lg' : ''
+            } `}>
+            {({open}) => (
                 <>
                     <div className="container">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center md:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
+                                <Disclosure.Button
+                                    className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
                                     <span className="sr-only">
                                         Open main menu
                                     </span>
@@ -63,30 +63,30 @@ const Header = () => {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <Link href="/" className="cursor-pointer">
-                                <div className="h-full relative z-10">
+                            <Link href="/">
+                                <div className="h-full relative z-10 cursor-pointer">
                                     <NextImage
                                         src="/logo-black.svg"
                                         alt="logo aries"
+                                        objectPosition="0% 50%"
                                     />
                                 </div>
                             </Link>
-                            <div className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
+                            <div
+                                className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
                                 <div className="hidden md:ml-6 md:block">
                                     <div className="flex space-x-2">
                                         {navigation.map((item) => (
                                             <Link
                                                 key={item.name}
-                                                href={item.href}
-                                            >
+                                                href={item.href}>
                                                 <span
                                                     className={classNames(
                                                         item.current
                                                             ? 'bg-gray-900 text-white'
                                                             : 'hover:bg-gray-700 hover:text-white',
                                                         'px-3 py-2 rounded-md nav-link cursor-pointer'
-                                                    )}
-                                                >
+                                                    )}>
                                                     {item.name}
                                                 </span>
                                             </Link>
@@ -95,7 +95,7 @@ const Header = () => {
                                 </div>
                             </div>
 
-                            <Cart />
+                            <Cart/>
                             <If condition={session}>
                                 <Then>
                                     {/* Profile dropdown */}
@@ -121,11 +121,11 @@ const Header = () => {
                                             enterTo="transform opacity-100 scale-100"
                                             leave="transition ease-in duration-75"
                                             leaveFrom="transform opacity-100 scale-100"
-                                            leaveTo="transform opacity-0 scale-95"
-                                        >
-                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            leaveTo="transform opacity-0 scale-95">
+                                            <Menu.Items
+                                                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <Menu.Item>
-                                                    {({ active }) => (
+                                                    {({active}) => (
                                                         <a
                                                             href="#"
                                                             className={classNames(
@@ -133,14 +133,13 @@ const Header = () => {
                                                                     ? 'bg-gray-100'
                                                                     : '',
                                                                 'menu-item'
-                                                            )}
-                                                        >
+                                                            )}>
                                                             Your Profile
                                                         </a>
                                                     )}
                                                 </Menu.Item>
                                                 <Menu.Item>
-                                                    {({ active }) => (
+                                                    {({active}) => (
                                                         <a
                                                             href="#"
                                                             className={classNames(
@@ -148,14 +147,13 @@ const Header = () => {
                                                                     ? 'bg-gray-100'
                                                                     : '',
                                                                 'menu-item'
-                                                            )}
-                                                        >
+                                                            )}>
                                                             Settings
                                                         </a>
                                                     )}
                                                 </Menu.Item>
                                                 <Menu.Item>
-                                                    {({ active }) => (
+                                                    {({active}) => (
                                                         <button
                                                             onClick={signOut}
                                                             className={classNames(
@@ -163,8 +161,7 @@ const Header = () => {
                                                                     ? 'bg-gray-100'
                                                                     : '',
                                                                 'menu-item'
-                                                            )}
-                                                        >
+                                                            )}>
                                                             Sign out
                                                         </button>
                                                     )}
@@ -176,8 +173,7 @@ const Header = () => {
                                 <Else>
                                     <button
                                         onClick={() => signIn()}
-                                        className="bg-gray-900 text-white nav-link px-3 py-2 rounded-md cursor-pointer"
-                                    >
+                                        className="bg-gray-900 text-white nav-link px-3 py-2 rounded-md cursor-pointer">
                                         Sign in
                                     </button>
                                 </Else>
@@ -193,8 +189,7 @@ const Header = () => {
                         enterTo="scale-100 opacity-100 translate-y-0"
                         leave="transition duration-200 ease-out"
                         leaveFrom="scale-100 opacity-100 translate-y-0 "
-                        leaveTo="scale-95 opacity-0 -translate-y-5"
-                    >
+                        leaveTo="scale-95 opacity-0 -translate-y-5">
                         <Disclosure.Panel className="md:hidden">
                             <div className="space-y-1 px-2 pt-2 pb-3">
                                 {navigation.map((item) => (
@@ -211,8 +206,7 @@ const Header = () => {
                                                 item.current
                                                     ? 'page'
                                                     : undefined
-                                            }
-                                        >
+                                            }>
                                             {item.name}
                                         </Disclosure.Button>
                                     </Link>

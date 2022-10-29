@@ -26,15 +26,11 @@ export async function getStaticProps({ params }) {
 }
 
 const ProductDetail = ({ product }) => {
-    const { state, dispatch } = useStoreContext();
+    const { dispatch } = useStoreContext();
 
     const addToCart = (item) => {
         dispatch({ type: constants.ADD_TO_CART, payload: item });
     };
-
-    useEffect(() => {
-        console.log(state, 'state from product detail');
-    });
 
     return (
         <article className="container my-12">
