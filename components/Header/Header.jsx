@@ -1,26 +1,29 @@
-import React, {Fragment} from 'react';
-import {Disclosure, Menu, Transition} from '@headlessui/react';
-import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from './../../helper/classNames';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import NextImage from '../../helper/NextImage/NextImage';
-import {signIn, signOut, useSession} from 'next-auth/react';
-import {Else, If, Then} from 'react-if';
-import {useWindowScroll} from 'react-use';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { Else, If, Then } from 'react-if';
+import { useWindowScroll } from 'react-use';
 import Cart from '../Cart/Cart';
 
 const Header = () => {
-    const {pathname} = useRouter();
-    const {y} = useWindowScroll();
+    const { pathname } = useRouter();
+    const { y } = useWindowScroll();
+
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [previousY, setPreviousY] = useState(y);
 
     const navigation = [
-        {name: 'Home', href: '/'},
-        {name: 'Services', href: '/services'},
-        {name: 'About', href: '/about'},
-        {name: 'Shop', href: '/product'},
-        {name: 'Blog', href: '/blog'},
-        {name: 'Contact', href: '/contact'}
+        { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
+        { name: 'About', href: '/about' },
+        { name: 'Shop', href: '/product' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Contact', href: '/contact' }
     ];
 
     navigation.map((item) => {
@@ -31,22 +34,32 @@ const Header = () => {
         return (item.current = false);
     });
 
-    const {data: session} = useSession();
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        if (y < previousY) {
+            setIsScrollDown(true);
+        } else {
+            setIsScrollDown(false);
+        }
+        setPreviousY(y);
+    }, [y]);
 
     return (
         <Disclosure
             as="nav"
-            className={`bg-white-chocolate fixed w-full z-[1000] ${
-                y > 100 ? 'shadow-lg' : ''
-            } `}>
-            {({open}) => (
+            className={`bg-white-chocolate absolute w-full z-[1000] transition duration-500 ${
+                y > 100 ? 'shadow-lg !fixed' : ''
+            } ${
+                isScrollDown && y > 300 ? '-translate-y-full' : 'translate-y-0'
+            }`}>
+            {({ open }) => (
                 <>
                     <div className="container">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center md:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button
-                                    className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none">
                                     <span className="sr-only">
                                         Open main menu
                                     </span>
@@ -72,8 +85,7 @@ const Header = () => {
                                     />
                                 </div>
                             </Link>
-                            <div
-                                className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
+                            <div className="hidden flex-1 items-center justify-center md:items-stretch md:justify-start md:flex">
                                 <div className="hidden md:ml-6 md:block">
                                     <div className="flex space-x-2">
                                         {navigation.map((item) => (
@@ -95,7 +107,7 @@ const Header = () => {
                                 </div>
                             </div>
 
-                            <Cart/>
+                            <Cart />
                             <If condition={session}>
                                 <Then>
                                     {/* Profile dropdown */}
@@ -122,10 +134,9 @@ const Header = () => {
                                             leave="transition ease-in duration-75"
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95">
-                                            <Menu.Items
-                                                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <Menu.Item>
-                                                    {({active}) => (
+                                                    {({ active }) => (
                                                         <a
                                                             href="#"
                                                             className={classNames(
@@ -139,7 +150,7 @@ const Header = () => {
                                                     )}
                                                 </Menu.Item>
                                                 <Menu.Item>
-                                                    {({active}) => (
+                                                    {({ active }) => (
                                                         <a
                                                             href="#"
                                                             className={classNames(
@@ -153,7 +164,7 @@ const Header = () => {
                                                     )}
                                                 </Menu.Item>
                                                 <Menu.Item>
-                                                    {({active}) => (
+                                                    {({ active }) => (
                                                         <button
                                                             onClick={signOut}
                                                             className={classNames(
