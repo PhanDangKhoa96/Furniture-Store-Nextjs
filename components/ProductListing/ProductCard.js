@@ -2,7 +2,7 @@ import React from 'react';
 import { urlFor } from '../../sanity';
 import Image from 'next/image';
 import Link from 'next/link';
-import Button from '../atoms/Button';
+import Button from '../atoms/Button/Button';
 
 const ProductCard = ({ product }) => {
     return (
