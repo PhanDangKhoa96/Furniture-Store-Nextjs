@@ -1,15 +1,20 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  @apply text-sm text-raisin-black font-light font-raleway min-h-screen grid grid-rows-[auto_1fr_auto] md:text-base;
+    @apply text-sm text-raisin-black font-light font-raleway min-h-screen grid grid-rows-[auto_1fr_auto] md:text-base;
+}
+
+input,
+textarea {
+    @apply border-none outline-none focus-visible:outline-none focus-visible:border-none;
 }
 
 h1,
@@ -17,41 +22,41 @@ h2,
 h3,
 h4,
 h5 {
-  @apply font-title;
+    @apply font-title;
 }
 
 h1 {
-  @apply text-6xl md:text-7xl;
-  //72px
+    @apply text-6xl md:text-7xl;
+    //72px
 }
 
 h2 {
-  @apply text-5xl md:text-[3.375rem];
-  //54px
+    @apply text-5xl md:text-[3.375rem];
+    //54px
 }
 
 h3 {
-  @apply text-4xl md:text-5xl;
-  //48px
+    @apply text-4xl md:text-5xl;
+    //48px
 }
 
 .product-title {
-  @apply text-xl font-semibold font-title md:text-2xl;
-  //24px
+    @apply text-xl font-semibold font-title md:text-2xl;
+    //24px
 }
 
 .section {
-  @apply py-10 md:py-20;
+    @apply py-10 md:py-20;
 }
 
 .nav-link {
-  @apply text-sm font-semibold tracking-widest;
+    @apply text-sm font-semibold tracking-widest;
 }
 
 .btn-primary {
-  @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
+    @apply bg-quick-silver text-sm hover:bg-outer-space transition duration-500 text-white;
 }
 
 .menu-item {
-  @apply block px-4 py-2 text-sm text-gray-700 w-full text-left;
+    @apply block px-4 py-2 text-sm text-gray-700 w-full text-left;
 }

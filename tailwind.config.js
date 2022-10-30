@@ -28,7 +28,8 @@ module.exports = {
                 'dark-electric-blue': '#577083',
                 'quick-silver': '#A0A1A5',
                 'raisin-black': '#222120',
-                'outer-space': '#444444'
+                'outer-space': '#444444',
+                bone: '#e3d5c8'
             }
         }
     },

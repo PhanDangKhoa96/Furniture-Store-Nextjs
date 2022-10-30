@@ -47,7 +47,9 @@ const AboutUs = () => {
                         </p>
 
                         <Link href="/about">
-                            <Button>Learn more</Button>
+                            <span className="mt-5 md:mt-10">
+                                <Button>Learn more</Button>
+                            </span>
                         </Link>
                     </div>
                 </div>
