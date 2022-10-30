@@ -32,7 +32,8 @@
     "react-if": "^4.1.4",
     "react-use": "^17.4.0",
     "remixicon": "^2.5.0",
-    "sass": "^1.54.9"
+    "sass": "^1.54.9",
+    "swiper": "^8.4.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
