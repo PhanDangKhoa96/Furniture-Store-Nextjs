@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../atoms/Button/Button';
 
 const Newsletter = () => {
     return (
@@ -30,7 +29,7 @@ const Newsletter = () => {
 
                     <button
                         type="submit"
-                        className="bg-white text-raisin-black px-7 py-2 justify-center sm:w-full">
+                        className="bg-white text-raisin-black px-7 py-2 justify-self-center sm:w-full">
                         Submit
                     </button>
                 </form>
