@@ -1,0 +1,9 @@
+:root {
+  --swiper-navigation-size: 30px;
+  --swiper-navigation-color: #d0cfcd;
+}
+
+.swiper-button-disabled {
+  opacity: 0 !important;
+  display: none;
+}
