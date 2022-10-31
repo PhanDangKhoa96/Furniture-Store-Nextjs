@@ -10,8 +10,9 @@ import ProductListing from '../components/ProductListing/ProductListing';
 import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
 import { fetchNews } from '../utils/fetchNews';
+import { fetchSocial } from '../utils/fetchSocial';
 
-const Home = ({ news, products }) => {
+const Home = ({ news, products, social }) => {
     return (
         <>
             <Hero />
@@ -20,7 +21,7 @@ const Home = ({ news, products }) => {
             <AboutUs />
             <Newsletter />
             <BlogListing news={news} />
-            <GetSocial />
+            <GetSocial social={social} />
         </>
     );
 };
@@ -31,6 +32,7 @@ export const getServerSideProps = async (context) => {
     const categories = await fetchCategories();
     const products = await fetchProducts();
     const news = await fetchNews();
+    const social = await fetchSocial();
     const session = await getSession(context);
 
     return {
@@ -38,6 +40,7 @@ export const getServerSideProps = async (context) => {
             categories,
             products,
             news,
+            social,
             session
         }
     };

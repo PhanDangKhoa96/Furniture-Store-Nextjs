@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { urlFor } from '../../sanity';
 
 const BlogCard = ({ title, image, slug }) => {
+    console.log(image);
     return (
         <Link href={`/blog/${slug.current}`}>
             <div className="group cursor-pointer mx-auto w-full max-w-lg">
