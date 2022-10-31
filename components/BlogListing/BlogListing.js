@@ -28,7 +28,8 @@ const blogData = [
     }
 ];
 
-const BlogListing = () => {
+const BlogListing = ({ news }) => {
+
     return (
         <section className="section">
             <div className="container">
@@ -36,10 +37,10 @@ const BlogListing = () => {
                     Latest News
                 </h3>
 
-                {blogData.length > 0 ? (
+                {news.length > 0 ? (
                     <div className="grid gap-y-10 grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-5 md:gap-y-24">
-                        {blogData.map((blog) => {
-                            return <BlogCard {...blog} key={blog.id} />;
+                        {news.map((blog) => {
+                            return <BlogCard {...blog} key={blog._id} />;
                         })}
                     </div>
                 ) : (

@@ -9,9 +9,9 @@ import Newsletter from '../components/Newsletter/Newsletter';
 import ProductListing from '../components/ProductListing/ProductListing';
 import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
+import { fetchNews } from '../utils/fetchNews';
 
-const Home = ({ categories, products }) => {
-    console.log(products);
+const Home = ({ news, products }) => {
     return (
         <>
             <Hero />
@@ -19,7 +19,7 @@ const Home = ({ categories, products }) => {
             <ProductListing products={products} />
             <AboutUs />
             <Newsletter />
-            <BlogListing />
+            <BlogListing news={news} />
             <GetSocial />
         </>
     );
@@ -30,12 +30,14 @@ export default Home;
 export const getServerSideProps = async (context) => {
     const categories = await fetchCategories();
     const products = await fetchProducts();
+    const news = await fetchNews();
     const session = await getSession(context);
 
     return {
         props: {
             categories,
             products,
+            news,
             session
         }
     };
