@@ -4,7 +4,7 @@ import { fetchProductDetail } from '../../utils/fetchProductDetail';
 import Image from 'next/image';
 import { urlFor } from '../../sanity';
 import { StoreContext, useStoreContext } from '../../store/context/store';
-import constants from '../../constants/constants';
+import { actionType } from '../../store/reducer/storeReducer';
 
 export async function getStaticPaths() {
     const products = await fetchProducts();
@@ -29,7 +29,7 @@ const ProductDetail = ({ product }) => {
     const { dispatch } = useStoreContext();
 
     const addToCart = (item) => {
-        dispatch({ type: constants.ADD_TO_CART, payload: item });
+        dispatch({ type: actionType.ADD_TO_CART, payload: item });
     };
 
     return (
