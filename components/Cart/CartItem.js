@@ -16,6 +16,10 @@ const CartItem = ({ slug, image, title, _id, quantity }) => {
     const increaseQuantity = (id) => {
         dispatch({ type: actionType.INCREASE_QUANTITY, payload: id });
     };
+
+    const decreaseQuantity = (id) => {
+        dispatch({ type: actionType.DECREASE_QUANTITY, payload: id });
+    };
     return (
         <div className="-m-3 flex items-center rounded-lg p-2">
             <Link href={`/product/${slug}`}>
@@ -30,20 +34,30 @@ const CartItem = ({ slug, image, title, _id, quantity }) => {
 
             <div className="ml-4 flex-auto">
                 <Link href={`/product/${slug}`}>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 mb-2">
                         {title} x {quantity}
                     </p>
                 </Link>
 
-                <div className="flex gap-x-2">
+                <div className="flex items-center">
+                    <button
+                        className={`text-lg aspect-square h-7 text-white ${
+                            quantity <= 1 ? 'bg-gray-300' : 'bg-wenge'
+                        }`}
+                        onClick={() => {
+                            decreaseQuantity(_id);
+                        }}
+                        disabled={quantity <= 1}>
+                        -
+                    </button>
                     <input
                         type="text"
                         value={quantity}
-                        className="border border-amber-700 border-solid"
+                        className="border border-wenge border-solid w-10 text-center h-7"
                     />
 
                     <button
-                        className="text-lg"
+                        className="text-lg aspect-square h-7 bg-wenge text-white"
                         onClick={() => {
                             increaseQuantity(_id);
                         }}>

@@ -1,11 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { StoreContext } from '../../store/context/store';
 import { Else, If, Then } from 'react-if';
 import { isEmpty } from 'lodash';
-import Image from 'next/image';
-import { urlFor } from '../../sanity';
 import Link from 'next/link';
 import Button from '../atoms/Button/Button';
 import CartItem from './CartItem';
@@ -17,9 +15,12 @@ const Cart = () => {
     const emptyCart = () => {
         dispatch({ type: actionType.EMPTY_CART });
     };
+    const totalPrice = state.reduce((a, b) => {
+        return a + b.price * b.quantity;
+    }, 0);
 
     return (
-        <div className="max-w-sm mr-8">
+        <div className="max-w-sm">
             <Popover className="relative">
                 {({ open }) => (
                     <>
@@ -59,6 +60,10 @@ const Cart = () => {
                                         </Else>
                                     </If>
 
+                                    <div className="py-10">
+                                        Total price: {totalPrice}
+                                    </div>
+
                                     <button
                                         className="my-10"
                                         onClick={() => {
@@ -69,7 +74,11 @@ const Cart = () => {
 
                                     <div className="mt-5 border border-solid">
                                         <Button>View Cart</Button>
-                                        <Button>Checkout</Button>
+                                        <Link href="/checkout" passHref={true}>
+                                            <a>
+                                                <Button>Checkout</Button>
+                                            </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </Popover.Panel>

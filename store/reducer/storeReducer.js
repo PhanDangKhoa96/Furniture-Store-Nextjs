@@ -6,19 +6,25 @@ export const actionType = {
     INIT_STORE: 'INIT_STORE',
     REMOVE_PRODUCT: 'REMOVE_PRODUCT',
     EMPTY_CART: 'EMPTY_CART',
-    INCREASE_QUANTITY: 'INCREASE_QUANTITY'
+    INCREASE_QUANTITY: 'INCREASE_QUANTITY',
+    DECREASE_QUANTITY: 'DECREASE_QUANTITY'
 };
 
-const StoreReducer = (state, {type, payload}) => {
+const StoreReducer = (state, { type, payload }) => {
     switch (type) {
         case actionType.ADD_TO_CART: {
             const product = state.find((item) => item._id === payload._id);
             if (product) {
-                product.quantity++;
-                setLocalstorage([...state]);
-                return [...state];
+                const newCart = state.map((p) => {
+                    if (p._id === payload._id)
+                        return { ...p, quantity: p.quantity + 1 };
+                    return p;
+                });
+                setLocalstorage(newCart);
+                return newCart;
             }
-            const newCart = [...state, {...payload, quantity: 1}];
+
+            const newCart = [...state, { ...payload, quantity: 1, price: 100 }];
             setLocalstorage(newCart);
             return newCart;
         }
@@ -36,18 +42,20 @@ const StoreReducer = (state, {type, payload}) => {
             setLocalstorage(newCart);
             return newCart;
         }
-        // case actionType.INCREASE_QUANTITY: {
-        //     const product = state.find((item) => item._id === payload);
-        //     console.log(product);
-        //     const newCart = state.filter((product) => product._id !== payload);
-        //     product.quantity++;
-        //     setLocalstorage([...state]);
-        //     return [...state];
-        // }
         case actionType.INCREASE_QUANTITY: {
             const newState = state.map((p) => {
                 if (p._id === payload)
-                    return {...p, quantity: p.quantity + 1};
+                    return { ...p, quantity: p.quantity + 1 };
+                return p;
+            });
+
+            setLocalstorage(newState);
+            return newState;
+        }
+        case actionType.DECREASE_QUANTITY: {
+            const newState = state.map((p) => {
+                if (p._id === payload)
+                    return { ...p, quantity: p.quantity - 1 };
                 return p;
             });
 

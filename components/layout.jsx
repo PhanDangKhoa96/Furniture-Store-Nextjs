@@ -5,7 +5,7 @@ import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import ScrollToTop from './atoms/ScrollToTop';
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
     return (
         <>
             <Head>
@@ -16,11 +16,13 @@ const Layout = ({children}) => {
                     rel="stylesheet"
                 />
             </Head>
-            <NextNProgress/>
-            <Header/>
-            <main className="pt-16">{children}</main>
-            <Footer/>
-            <ScrollToTop/>
+            <NextNProgress />
+            <div className="min-h-screen flex flex-col justify-between">
+                <Header />
+                <main className="pt-16">{children}</main>
+                <Footer />
+                <ScrollToTop />
+            </div>
         </>
     );
 };
