@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.0.12",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
+    "@stripe/stripe-js": "^1.42.1",
     "@tailwindcss/line-clamp": "^0.4.2",
     "dotenv": "^16.0.3",
     "framer-motion": "^6.5.1",
@@ -33,6 +34,7 @@
     "react-use": "^17.4.0",
     "remixicon": "^2.5.0",
     "sass": "^1.54.9",
+    "stripe": "^10.16.0",
     "swiper": "^8.4.4"
   },
   "devDependencies": {
