@@ -16,9 +16,9 @@ const Checkout = () => {
             body: JSON.stringify(state || {}) // body data type must match "Content-Type" header
         });
 
-        // const checkoutSession = await response.json();
-
         console.log(response);
+
+        // const checkoutSession = await response.json();
 
         // // Internal Server Error
         // if (checkoutSession?.statusCode === 500) {
@@ -27,7 +27,7 @@ const Checkout = () => {
         // }
         //
         // // Redirect to checkout
-        // const stripe = await getStripe();
+        const stripe = await getStripe();
         // const { error } = await stripe.redirectToCheckout({
         //     // Make the id field from the Checkout Session creation API response
         //     // available to this file, so you can provide it as parameter here
